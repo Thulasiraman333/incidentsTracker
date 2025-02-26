@@ -1,1 +1,63 @@
-<p>users works!</p>
+<div class="container mt-4">
+  <div class="card p-3 mb-4">
+    <h4>Add / Edit User</h4>
+    <form [formGroup]="userForm">
+      <div class="row">
+        <div class="col-md-6">
+          <label foe="username" class="form-label">Username</label>
+          <input type="text" name="userName" class="form-control" formControlName="userName">
+        </div>
+        <div class="col-md-6">
+          <label foe="emailId" class="form-label">EmailId</label>
+          <input type="text" name="emailId" class="form-control" formControlName="emailId">
+        </div>
+        <div class="col-md-6">
+          <label foe="username" class="form-label">FullName</label>
+          <input type="text" name="fullName" class="form-control" formControlName="fullName">
+        </div>
+        <div class="col-md-6">
+          <label foe="username" class="form-label">Password</label>
+          <input type="text" name="password" class="form-control" formControlName="password">
+        </div>
+        <div class="col-md-6">
+          <label for="role" class="form-label">Role</label>
+          <select class="form-select" formControlName="role" name="role">
+            <option value="Admin">Admin</option>
+            <option value="SupportUser">SupportUser</option>
+            <option value="User">User</option>
+          </select>
+        </div>
+      </div>
+      @if(userForm.controls['userId'].value == 0){
+      <button type="button" (click)="onSaveUser()" class="btn btn-primary mt-2">Save User</button>
+      }@else {
+      <button type="button" (click)="onUpdateUser()" class="btn btn-warning mt-2">Update User</button>
+      }
+    </form>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="card p-3 mb-4">
+    <h4>User List</h4>
+    <div class="row">
+      @for (item of userList(); track $index) {
+      <div class="card col-3 m-3">
+        <div class="card-body">
+          <h6>{{item.fullName}} | {{item.role}}</h6>
+          <p class="card-text">Email: {{item.emailId}}</p>
+          <p>Username: {{item.userName}}</p>
+          <div class="row">
+            <div class="col-6">
+              <button class="btn btn-danger btn-sm" (click)="deleteUser(item)">Delete</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-primary btn-sm" (click)="editUser(item)">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

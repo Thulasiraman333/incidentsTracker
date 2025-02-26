@@ -1,1 +1,25 @@
-<p>header works!</p>
+<div class="parent">
+  <div class="sidebar">
+    <div>
+      <h4>Dashboard</h4>
+      <a routerLink="/dashboard">Home</a>
+      @if(loggedUserData && this.loggedUserData.role =="IncidentAdmin"){
+      <a routerLink="/users">Users</a>
+      }
+
+      @if(loggedUserData && this.loggedUserData.role == "User"){
+      <a routerLink="/create-new">Create New</a>
+      }
+      <a routerLink="/incident-list">Incident List</a>
+    </div>
+    @if(loggedUserData && loggedUserData.userName){
+    <div>
+      <p>Logged in as: <strong>{{loggedUserData.userName}}</strong></p>
+      <button class="btn btn-danger w-100" (click)="logOff()">Log Off</button>
+    </div>
+    }
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
